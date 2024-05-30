@@ -49,10 +49,10 @@ function update($table, $cols, $arg)
 
     if (is_array($arg)) {
         foreach ($arg as $key => $value) {
-            $tmp[] = "`$key`='{$value}'";
+            $tmpp[] = "`$key`='{$value}'";
         }
 
-        $sql .= "WHERE " . join(" && ", $tmp);
+        $sql .= "WHERE " . join(" && ", $tmpp);
     } else {
         $sql .= "WHERE `id`='{$arg}'";
     }
@@ -60,6 +60,23 @@ function update($table, $cols, $arg)
     return $pdo->exec($sql);
 }
 
+function del($table, $arg)
+{
+    global $pdo;
+    $sql = "DELETE FROM `{$table}` WHERE ";
+
+    if (is_array($arg)) {
+        foreach ($arg as $key => $value) {
+            $tmp[] = "`$key`='{$value}'";
+        }
+
+        $sql .= join(" && ", $tmp);
+    } else {
+        $sql .= " `id`='{$arg}'";
+    }
+
+    return $pdo->exec($sql);
+}
 
 
 /**
