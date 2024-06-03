@@ -51,22 +51,22 @@ function save($table, $array)
         //使用迴圈將欄位名稱和值組合成字串
         $tmp = array2sql($array);
         $sql .= join(",", $tmp);
-        
+
         $sql .= " WHERE `id`='{$array}'";
-        
+
         echo $sql;
         return $pdo->exec($sql);
     } else {
         //insert
         $sql = "INSERT INTO `{$table}` ";
 
-    $sql .= "(`" . join("`,`", array_keys($array)) . "`)";
+        $sql .= "(`" . join("`,`", array_keys($array)) . "`)";
 
-    $sql .= " VALUES('" . join("','", $array) . "')";
+        $sql .= " VALUES('" . join("','", $array) . "')";
 
-    //echo $sql;
+        //echo $sql;
 
-    return $pdo->exec($sql);
+        return $pdo->exec($sql);
     }
 }
 
